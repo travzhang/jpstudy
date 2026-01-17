@@ -35,7 +35,7 @@ export default function TabsLayout({
     <div className="flex flex-col h-screen">
       <SafeArea position="top" />
       <div className="flex-1 overflow-auto">{children}</div>
-      <div className="border-t border-gray-200" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      <div className="border-t border-gray-200" style={{ paddingBottom: '34px' }}>
         <TabBar
           activeKey={activeTab}
           onChange={handleTabChange}
@@ -45,7 +45,6 @@ export default function TabsLayout({
           <TabBar.Item key="my" icon={<UserOutline />} title="我的" />
         </TabBar>
       </div>
-      <SafeArea position="bottom" />
     </div>
   );
 }
