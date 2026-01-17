@@ -1,0 +1,26 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="512" height="512" fill="#FF2442" rx="80"/>
+  
+  <!-- 日历图标 -->
+  <g transform="translate(256, 256)">
+    <!-- 日历主体 -->
+    <rect x="-120" y="-140" width="240" height="200" fill="#FFFFFF" rx="12"/>
+    
+    <!-- 日历顶部（装订部分） -->
+    <rect x="-120" y="-140" width="240" height="40" fill="#FF2442" rx="12 12 0 0"/>
+    
+    <!-- 日历环 -->
+    <circle cx="-60" cy="-120" r="8" fill="#FFFFFF"/>
+    <circle cx="60" cy="-120" r="8" fill="#FFFFFF"/>
+    
+    <!-- 日期数字 -->
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="#FF2442" text-anchor="middle" dominant-baseline="middle">16</text>
+    
+    <!-- 装饰线条 -->
+    <line x1="-100" y1="40" x2="100" y2="40" stroke="#FF2442" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  
+  <!-- 文字 "晴空" -->
+  <text x="256" y="380" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#FFFFFF" text-anchor="middle">晴空</text>
+</svg>

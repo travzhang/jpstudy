@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// 单词模型
+model Word {
+  id        Int      @id @default(autoincrement())
+  word      String   // 单词（汉字/假名）
+  reading   String   // 读音（假名）
+  meaning   String   // 中文意思
+  wordType  String   // 词性：adjective, verb, noun
+  subType   String?  // 子类型：i-adjective, na-adjective, godan, ichidan, irregular
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([wordType])
+  @@index([wordType, subType])
+  @@map("jpstudy_word")
+}

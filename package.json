@@ -1,0 +1,55 @@
+{
+  "name": "qingkong",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "biome check",
+    "format": "biome format --write",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:migrate:create": "prisma migrate dev --create-only",
+    "db:sql": "prisma migrate diff --from-empty --to-schema prisma/schema.prisma --script",
+    "db:sql:save": "prisma migrate diff --from-empty --to-schema prisma/schema.prisma --script > prisma/schema.sql",
+    "db:studio": "prisma studio",
+    "postinstall": "prisma generate",
+    "generate-icons": "node scripts/generate-icons.mjs"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.1.0",
+    "@prisma/client": "^7.1.0",
+    "antd-mobile": "^5.42.3",
+    "antd-mobile-icons": "^0.3.0",
+    "demos": "^1.0.0",
+    "next": "16.1.2",
+    "pg": "^8.13.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/pg": "^8.11.10",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
+    "dotenv": "^16.4.5",
+    "prisma": "^7.1.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "overrides": {
+    "v8-debug": "npm:noop@1.0.0",
+    "v8-profiler": "npm:noop@1.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "v8-debug": "npm:noop@1.0.0",
+      "v8-profiler": "npm:noop@1.0.0"
+    }
+  }
+}
