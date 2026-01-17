@@ -15,14 +15,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "日语学习助手",
+  title: "日语学习小助手",
   description: "日语变形学习助手",
   manifest: "/manifest.json",
   themeColor: "#FF2442",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "日语学习助手",
+    title: "日语学习小助手",
   },
   viewport: {
     width: "device-width",

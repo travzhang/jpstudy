@@ -1,7 +1,7 @@
 {
-  "name": "晴空单向历",
-  "short_name": "晴空",
-  "description": "记录每一天的美好",
+  "name": "日语学习小助手",
+  "short_name": "日语助手",
+  "description": "日语变形学习助手",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

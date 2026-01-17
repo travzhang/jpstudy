@@ -1,10 +1,10 @@
 // Service Worker for PWA
-const CACHE_NAME = 'qingkong-v1';
+const CACHE_NAME = 'jpstudy-v1';
 const urlsToCache = [
   '/',
-  '/login',
-  '/create',
-  '/me',
+  '/words',
+  '/grammar',
+  '/my',
 ];
 
 // 安装 Service Worker

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>生成 PWA 图标</title>
+  <title>生成 PWA 图标 - 日语学习小助手</title>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -67,7 +67,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>🎨 PWA 图标生成器</h1>
+    <h1>🎨 PWA 图标生成器 - 日语学习小助手</h1>
     
     <div class="preview">
       <div class="icon-preview">
@@ -95,6 +95,21 @@
   </div>
 
   <script>
+    // 绘制圆角矩形的辅助函数
+    function roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+    
     // 绘制图标
     function drawIcon(canvas, size) {
       const ctx = canvas.getContext('2d');
@@ -103,94 +118,42 @@
       // 清空画布
       ctx.clearRect(0, 0, size, size);
       
-      // 绘制背景（圆角矩形）
-      ctx.fillStyle = '#FF2442';
-      ctx.beginPath();
+      // 绘制背景（圆角矩形）- 使用渐变色
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, '#FF2442');
+      gradient.addColorStop(1, '#FF6B8A');
+      ctx.fillStyle = gradient;
       const radius = 80 * scale;
-      ctx.roundRect(0, 0, size, size, radius);
+      roundRect(ctx, 0, 0, size, size, radius);
       ctx.fill();
+
+      // 绘制日文字符"日"的背景圆形
+      const centerX = size / 2;
+      const centerY = size / 2 - 20 * scale;
+      const circleRadius = 180 * scale;
       
-      // 绘制日历主体
-      const calendarX = size / 2;
-      const calendarY = size / 2 - 20 * scale;
-      const calendarWidth = 240 * scale;
-      const calendarHeight = 200 * scale;
-      
-      // 日历主体（白色）
+      // 白色圆形背景
       ctx.fillStyle = '#FFFFFF';
       ctx.beginPath();
-      ctx.roundRect(
-        calendarX - calendarWidth / 2,
-        calendarY - calendarHeight / 2,
-        calendarWidth,
-        calendarHeight,
-        12 * scale
-      );
+      ctx.arc(centerX, centerY, circleRadius, 0, Math.PI * 2);
       ctx.fill();
-      
-      // 日历顶部（红色装订部分）
+
+      // 绘制日文字符"日"
       ctx.fillStyle = '#FF2442';
-      ctx.beginPath();
-      ctx.roundRect(
-        calendarX - calendarWidth / 2,
-        calendarY - calendarHeight / 2,
-        calendarWidth,
-        40 * scale,
-        12 * scale
-      );
-      ctx.fill();
-      
-      // 日历环
-      ctx.fillStyle = '#FFFFFF';
-      ctx.beginCircle(calendarX - 60 * scale, calendarY - 120 * scale, 8 * scale);
-      ctx.fill();
-      ctx.beginCircle(calendarX + 60 * scale, calendarY - 120 * scale, 8 * scale);
-      ctx.fill();
-      
-      // 日期数字 "16"
-      ctx.fillStyle = '#FF2442';
-      ctx.font = `bold ${120 * scale}px Arial`;
+      const fontSize = 200 * scale;
+      ctx.font = `bold ${fontSize}px Arial, "Hiragino Sans", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('16', calendarX, calendarY + 20 * scale);
-      
-      // 装饰线条
-      ctx.strokeStyle = '#FF2442';
-      ctx.lineWidth = 4 * scale;
-      ctx.beginPath();
-      ctx.moveTo(calendarX - 100 * scale, calendarY + 40 * scale);
-      ctx.lineTo(calendarX + 100 * scale, calendarY + 40 * scale);
-      ctx.stroke();
-      
-      // 文字 "晴空"
+      // 确保文字垂直居中
+      ctx.fillText('日', centerX, centerY + fontSize * 0.1);
+
+      // 底部文字 "学"
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = `bold ${48 * scale}px Arial`;
-      ctx.fillText('晴空', size / 2, size - 60 * scale);
-    }
-    
-    // 扩展 Canvas API（如果不存在）
-    if (!CanvasRenderingContext2D.prototype.roundRect) {
-      CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
-        this.beginPath();
-        this.moveTo(x + radius, y);
-        this.lineTo(x + width - radius, y);
-        this.quadraticCurveTo(x + width, y, x + width, y + radius);
-        this.lineTo(x + width, y + height - radius);
-        this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-        this.lineTo(x + radius, y + height);
-        this.quadraticCurveTo(x, y + height, x, y + height - radius);
-        this.lineTo(x, y + radius);
-        this.quadraticCurveTo(x, y, x + radius, y);
-        this.closePath();
-      };
-    }
-    
-    if (!CanvasRenderingContext2D.prototype.beginCircle) {
-      CanvasRenderingContext2D.prototype.beginCircle = function(x, y, radius) {
-        this.beginPath();
-        this.arc(x, y, radius, 0, Math.PI * 2);
-        this.closePath();
-      };
+      const bottomFontSize = 60 * scale;
+      ctx.font = `bold ${bottomFontSize}px Arial, "Hiragino Sans", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillText('学', size / 2, size - 80 * scale);
     }
     
     // 初始化
