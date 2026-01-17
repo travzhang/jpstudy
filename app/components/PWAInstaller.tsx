@@ -10,9 +10,27 @@ export default function PWAInstaller() {
     // 注册 Service Worker
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register("/sw.js")
+        .register("/sw.js", { updateViaCache: "none" })
         .then((registration) => {
           console.log("Service Worker 注册成功:", registration);
+          
+          // 检查更新
+          registration.addEventListener("updatefound", () => {
+            const newWorker = registration.installing;
+            if (newWorker) {
+              newWorker.addEventListener("statechange", () => {
+                if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+                  // 新版本已安装，提示用户刷新
+                  console.log("Service Worker 新版本已安装，请刷新页面");
+                }
+              });
+            }
+          });
+          
+          // 定期检查更新
+          setInterval(() => {
+            registration.update();
+          }, 60000); // 每分钟检查一次
         })
         .catch((error) => {
           console.error("Service Worker 注册失败:", error);

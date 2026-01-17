@@ -4,3 +4,8 @@
 :root {
   --adm-safe-area-multiple: 1;
 }
+
+/* TabBar 底部安全区域 - 确保在所有设备上都有足够的底部间距 */
+.adm-tab-bar {
+  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+}

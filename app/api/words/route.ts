@@ -30,7 +30,13 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: "desc" },
     });
 
-    return NextResponse.json(words);
+    return NextResponse.json(words, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      },
+    });
   } catch (error) {
     console.error("Error fetching words:", error);
     return NextResponse.json(
@@ -80,7 +86,14 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json(newWord, { status: 201 });
+    return NextResponse.json(newWord, {
+      status: 201,
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      },
+    });
   } catch (error) {
     console.error("Error creating word:", error);
     return NextResponse.json(

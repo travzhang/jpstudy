@@ -167,7 +167,13 @@ export default function ConjugationPage() {
         if (wordType !== "noun" && subType) {
           params.append("subType", subType);
         }
-        const response = await fetch(`/api/words?${params.toString()}`);
+        params.append("_t", Date.now().toString());
+        const response = await fetch(`/api/words?${params.toString()}`, {
+          cache: "no-store",
+          headers: {
+            "Cache-Control": "no-cache",
+          },
+        });
         if (response.ok) {
           const data = await response.json();
           setWords(data);

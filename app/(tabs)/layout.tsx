@@ -35,15 +35,16 @@ export default function TabsLayout({
     <div className="flex flex-col h-screen">
       <SafeArea position="top" />
       <div className="flex-1 overflow-auto">{children}</div>
-      <TabBar
-        activeKey={activeTab}
-        onChange={handleTabChange}
-        className="border-t border-gray-200"
-      >
-        <TabBar.Item key="words" icon={<FileOutline />} title="单词" />
-        <TabBar.Item key="grammar" icon={<AppOutline />} title="语法" />
-        <TabBar.Item key="my" icon={<UserOutline />} title="我的" />
-      </TabBar>
+      <div className="border-t border-gray-200" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+        <TabBar
+          activeKey={activeTab}
+          onChange={handleTabChange}
+        >
+          <TabBar.Item key="words" icon={<FileOutline />} title="单词" />
+          <TabBar.Item key="grammar" icon={<AppOutline />} title="语法" />
+          <TabBar.Item key="my" icon={<UserOutline />} title="我的" />
+        </TabBar>
+      </div>
       <SafeArea position="bottom" />
     </div>
   );

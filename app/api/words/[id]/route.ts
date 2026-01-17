@@ -30,7 +30,13 @@ export async function PUT(
       },
     });
 
-    return NextResponse.json(updatedWord);
+    return NextResponse.json(updatedWord, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      },
+    });
   } catch (error) {
     console.error("Error updating word:", error);
     return NextResponse.json(
@@ -53,7 +59,16 @@ export async function DELETE(
       where: { id },
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json(
+      { success: true },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+      }
+    );
   } catch (error) {
     console.error("Error deleting word:", error);
     return NextResponse.json(

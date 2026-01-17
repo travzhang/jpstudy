@@ -84,7 +84,14 @@ export default function WordsPage() {
       if (search) {
         params.append("search", search);
       }
-      const response = await fetch(`/api/words?${params.toString()}`);
+      // 添加时间戳防止缓存，并设置 no-cache 头部
+      params.append("_t", Date.now().toString());
+      const response = await fetch(`/api/words?${params.toString()}`, {
+        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-cache",
+        },
+      });
       if (response.ok) {
         const data = await response.json();
         setWords(data);
@@ -172,6 +179,10 @@ export default function WordsPage() {
       if (result) {
         const response = await fetch(`/api/words/${id}`, {
           method: "DELETE",
+          cache: "no-store",
+          headers: {
+            "Cache-Control": "no-cache",
+          },
         });
         
         if (response.ok) {
@@ -210,8 +221,10 @@ export default function WordsPage() {
 
       const response = await fetch(url, {
         method,
+        cache: "no-store",
         headers: {
           "Content-Type": "application/json",
+          "Cache-Control": "no-cache",
         },
         body: JSON.stringify({
           word: formData.word,
