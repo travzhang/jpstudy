@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* SafeArea 支持 */
+:root {
+  --adm-safe-area-multiple: 1;
+}

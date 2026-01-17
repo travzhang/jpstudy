@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { TabBar } from "antd-mobile";
+import { TabBar, SafeArea } from "antd-mobile";
 import { UserOutline, FileOutline, AppOutline } from "antd-mobile-icons";
 
 export default function TabsLayout({
@@ -33,6 +33,7 @@ export default function TabsLayout({
 
   return (
     <div className="flex flex-col h-screen">
+      <SafeArea position="top" />
       <div className="flex-1 overflow-auto">{children}</div>
       <TabBar
         activeKey={activeTab}
@@ -43,6 +44,7 @@ export default function TabsLayout({
         <TabBar.Item key="grammar" icon={<AppOutline />} title="语法" />
         <TabBar.Item key="my" icon={<UserOutline />} title="我的" />
       </TabBar>
+      <SafeArea position="bottom" />
     </div>
   );
 }
